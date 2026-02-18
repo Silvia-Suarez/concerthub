@@ -87,7 +87,7 @@ body {
 }
 
 /* Encabezado de la tarjeta: título y género lado a lado */
-.card-header {
+.concert-card-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -105,7 +105,7 @@ body {
 }
 
 /* ===== Badges (etiquetas de estado) ===== */
-.card-badges {
+.concert-card-badges {
   margin: 10px 0 0 0;
 }
 
@@ -129,19 +129,19 @@ body {
 }
 
 /* Metadatos de la tarjeta: fecha, lugar, ciudad */
-.card__meta {
+.concert-card-meta {
   margin: 8px 0;
   opacity: 0.9;
 }
 
 /* Precio del concierto en negrita */
-.card__price {
+.concert-card-price {
   margin: 12px 0;
   font-weight: bold;
 }
 
 /* Botón de acción en la tarjeta (ej: comprar entrada) */
-.card__btn {
+.concert-card-btn {
   width: 100%;
   padding: 10px;
   border: 1px solid #333;
@@ -151,7 +151,7 @@ body {
 }
 
 /* Estilo del botón cuando está deshabilitado (ej: concierto agotado) */
-.card__btn[disabled] {
+.concert-card-btn[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -165,44 +165,44 @@ body {
   margin: 18px 0;
 }
 
-.filters__row {
+.filters-row {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 12px;
 }
 
 @media (max-width: 900px) {
-  .filters__row {
+  .filters-row {
     grid-template-columns: 1fr;
   }
 }
 
-.filters__row--actions {
+.filters-row--actions {
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.filters__field {
+.filters-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.filters__label {
+.filters-label {
   font-size: 12px;
   opacity: 0.75;
 }
 
-.filters__input,
-.filters__select {
+.filters-input,
+.filters-select {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #bbb;
 }
 
-.filters__checkbox {
+.filters-checkbox {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -223,7 +223,7 @@ body {
   justify-content: flex-end;
 }
 
-.results__count {
+.results-count {
   font-size: 12px;
   opacity: 0.8;
   border: 1px solid #ddd;
@@ -239,11 +239,11 @@ body {
   opacity: 0.9;
 }
 
-.empty__title {
+.empty-title {
   margin: 0 0 8px 0;
 }
 
-.empty__text {
+.empty-text {
   margin: 0;
   opacity: 0.85;
 }

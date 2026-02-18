@@ -33,11 +33,11 @@ export default function FilterBar({
 }: Props) {
 
     return (
-        <section>
-            <div>
+        <section className="filters">
+            <div className="filters-row">
                 {/* Campo de texto para buscar por título, lugar o ciudad */}
-                <label>
-                    <span> Search </span>
+                <label className="filters-field">
+                    <span className="filters-label"> Search </span>
                     <input
                         type="text"
                         className="filters-input"
@@ -53,8 +53,8 @@ export default function FilterBar({
                 </label>
 
                 {/* Selector desplegable para filtrar por género musical */}
-                <label>
-                    <span>Genre</span>
+                <label className="filters-field">
+                    <span className="filters-label">Genre</span>
                     <select
                         className="filters-select"
                         value={selectedGenre}
@@ -70,28 +70,35 @@ export default function FilterBar({
                 </label>
 
                 {/* Selector desplegable para filtrar por ciudad */}
-                <label>
-                    <span>City</span>
+                <label className="filters-field">
+                    <span className="filters-label">City</span>
                     <select
                         className="filters-select"
                         value={selectedCity}
                         onChange={(e) => {
                             console.log('input Title, venue city', e.target.value);
-                            onSelectedCity(e.target.value)}}
+                            onSelectedCity(e.target.value)
+                        }}
                     >
                         <option value={"ALL"}>All</option>
                         {cities.map((c) => <option key={c} value={c}>{c}</option>)}
                     </select>
                 </label>
             </div>
-            <div>
+            <div className="filters-row filters-row--actions">
                 {/* Checkbox para mostrar solo los conciertos disponibles (no agotados) */}
-                <label>
+                <label className="filters-checkbox">
                     <input type="checkbox" checked={onlyAvailable} onChange={(e) => onSetOnlyAvailable(e.target.checked)} />
                     <span>OnlyAvailable</span>
                 </label>
                 {/* Botón para reiniciar todos los filtros a su valor por defecto */}
-                <button className="btn" type="button" onClick={() => {onReset(); console.log("reset")}}>Reset Filters</button>
+                <button
+                    className="btn"
+                    type="button"
+                    onClick={() => onReset()}
+                >
+                    Reset Filters
+                </button>
             </div>
         </section>
     );

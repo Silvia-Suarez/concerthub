@@ -21,7 +21,7 @@ export default function ConcertCard({ concert }: Props) {
 
     return (
         <article className="concert-card">
-            <div>
+            <div className="concert-card-header">
                 {/* Título del concierto */}
                 <h3 className="concert-card-title">
                     {concert.title}
@@ -31,22 +31,25 @@ export default function ConcertCard({ concert }: Props) {
                     {concert.genre}
                 </span>
             </div>
-            <div>
+            <div className="concert-card-badges">
                 {/* Muestra el estado: "SOLD_OUT" si está agotado, "AVAILABLE" si hay entradas */}
-                <span>
+                <span className={isSold ? "badge badge--danger" : "badge badge--success"}>
                     {isSold ? ConcertStatusEnum.sold_out : ConcertStatusEnum.available}
                 </span>
             </div>
             {/* Información adicional: fecha, precio y ubicación */}
-            <p>
+            <p className="concert-card-meta">
                 Date: {concert.date}
             </p>
-            <p>
-                ${concert.price}
-            </p>
-            <p>
+            <p className="concert-card-meta">
                 Address: {concert.venue} - City: {concert.city}
             </p>
+            <p className="concert-card-price">
+                ${concert.price}
+            </p>
+            <button className="concert-card-btn" type="button" disabled={isSold}>
+                View Details
+            </button>
         </article>
     );
 }

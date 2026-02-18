@@ -33,9 +33,9 @@ function App() {
 
   // useEffect se ejecuta después del primer render.
   // Aquí se podría usar para cargar datos de una API, por ejemplo.
-  useEffect(()=>{
-    
-  },[])
+  useEffect(() => {
+
+  }, [])
 
   // useMemo filtra los conciertos cada vez que cambia alguno de los filtros.
   // Se recalcula automáticamente cuando cambian las dependencias del arreglo [searchTerm, selectedCity, ...].
@@ -73,7 +73,8 @@ function App() {
   }
 
   return (
-    <>
+    <div className='app'>
+
       {/* Barra de navegación superior */}
       <Navbar></Navbar>
 
@@ -92,8 +93,9 @@ function App() {
         onReset={handleReset}
       />
 
-      <main>
-        <h1>Upcoming ...</h1>
+      <main className='container'>
+        <h1 className='pageTitle'>Upcoming Concerts...</h1>
+        <p className='pageSubtitle'>Find the best concerts to attend</p>
         {/* Renderizado condicional: si no hay resultados muestra un mensaje, si hay muestra la lista */}
         {filteredConcerts.length === 0 ?
           <section>
@@ -103,7 +105,7 @@ function App() {
           <ConcertList concerts={filteredConcerts} />
         }
       </main>
-    </>
+    </div>
   )
 }
 
