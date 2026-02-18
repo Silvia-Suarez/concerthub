@@ -1,5 +1,7 @@
 import type { Concert } from "../types";
 
+// Arreglo con los datos de los conciertos disponibles en la aplicación.
+// Cada objeto sigue la interfaz Concert definida en types.ts.
 export const concerts: Concert[] = [
   {
     id: 1,

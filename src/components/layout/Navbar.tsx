@@ -1,6 +1,7 @@
+// Componente de la barra de navegación superior.
+// Muestra el nombre de la app y los enlaces de navegación.
+// e.preventDefault() evita que la página se recargue al hacer clic en los enlaces.
 export default function Navbar() {
-    // const palabra: string | number = '';
-    // typeof palabra === 'string' ? '' : '';
 
     return (
         <header className="navbar">
@@ -10,9 +11,6 @@ export default function Navbar() {
                 <a href="#" onClick={(e) => e.preventDefault()}>Concerts</a>
                 <a href="#" onClick={(e) => e.preventDefault()}>Others</a>
                 <a href="#" onClick={(e) => e.preventDefault()}>Cart</a>
-                {/* {title === 'tienda' ? <>
-                    <a href="#cart"> Cart</a>
-                </> : null} */}
             </nav>
         </header>
     );
