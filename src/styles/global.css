@@ -38,11 +38,11 @@
     border-bottom: 1px solid #ddd;
   }
   
-  .navbar__title {
+  .navbar-title {
     margin: 0;
   }
   
-  .navbar__links a {
+  .navbar-links a {
     margin-left: 12px;
     text-decoration: none;
     color: black;
@@ -69,30 +69,30 @@
   }
   
   /* Card */
-  .card {
+  .concert-card {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 14px;
   }
   
-  .card__header {
+  .card-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 8px;
   }
   
-  .card__title {
+  .concert-card-title {
     margin: 0;
     font-size: 16px;
   }
   
-  .card__genre {
+  .concert-card-genre {
     font-size: 12px;
     opacity: 0.7;
   }
   
-  .card__badges {
+  .card-badges {
     margin: 10px 0 0 0;
   }
   

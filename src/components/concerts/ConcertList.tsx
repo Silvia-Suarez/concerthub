@@ -9,7 +9,7 @@ export default function ConcertList({ concerts }: Props) {
     return (
         <section className="grid">
             {concerts.map((c) => (
-                <ConcertCard key={c.id} {...c}></ConcertCard>
+                <ConcertCard key={c.id} concert={c}></ConcertCard>
             ))}
         </section>
     );

@@ -1,5 +1,4 @@
 export type ConcertStatus = "AVAILABLE" | "SOLD_OUT";
-
 export interface Concert {
     id: number;
     title: string;

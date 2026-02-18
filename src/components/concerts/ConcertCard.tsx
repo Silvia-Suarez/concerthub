@@ -1,10 +1,15 @@
 import type { Concert } from "../../types";
 
-// type Props = {
-//     concert: Concert;
-// }
-export default function ConcertCard(concert: Concert) {
-    const isSold: boolean = concert.status === "SOLD_OUT";
+enum ConcertStatusEnum {
+    available = "AVAILABLE",
+    sold_out = "SOLD_OUT"
+}
+
+type Props = {
+    concert: Concert;
+}
+export default function ConcertCard({ concert }: Props) {
+    const isSold: boolean = concert.status === ConcertStatusEnum.sold_out;
     return (
         <article className="concert-card">
             <div>
@@ -13,7 +18,7 @@ export default function ConcertCard(concert: Concert) {
             </div>
             <div>
                 <span>
-                    {isSold ? "SOLD" : "AVAILABLE"}
+                    {isSold ? ConcertStatusEnum.sold_out : ConcertStatusEnum.available}
                 </span>
             </div>
             <p>
