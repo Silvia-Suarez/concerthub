@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Concert } from "../../types";
 import { ConcertStatusEnum } from "../../types";
 import Badge from "../ui/Badge";
@@ -43,9 +44,13 @@ export default function ConcertCard({ concert, onAddToCart }: Props) {
         </p>
       </div>
 
+      <div className="my-3 rounded-btn  bg-surface px-1 py-2 text-sm font-medium shadow-card hover:bg-gray-50">
+        <Link to={`/concerts/${concert.id}`}>
+          Details
+        </Link>
+      </div>
       <div className="mt-4 flex items-center justify-between">
         <p className="m-0 font-semibold text-text">${concert.price}</p>
-
         <Button variant="primary" disabled={isSold} onClick={() => onAddToCart(concert)}>
           <FiShoppingCart />
           {isSold ? "Unavailable" : "Add"}

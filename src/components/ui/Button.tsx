@@ -25,7 +25,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={` ${base} rounded-btn ${variants[variant]}`}
+      className={` ${base} cursor-pointer rounded-btn ${variants[variant]}`}
       onClick={onClick}
       disabled={disabled}
     >
