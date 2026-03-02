@@ -2,7 +2,7 @@
 // - useState: para manejar el estado local del componente
 // - useMemo: para memorizar valores calculados y evitar recalcularlos en cada render
 // - useEffect: para ejecutar efectos secundarios (como llamadas a APIs, suscripciones, etc.)
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import "./styles/global.css"
 import './App.css'
 import Navbar from './components/layout/Navbar'
@@ -12,9 +12,19 @@ import FilterBar from './components/concerts/FilterBar'
 import type { CartItem, Concert } from './types'
 import CartPanel from './components/cart/CartPanel'
 import { ConcertStatusEnum } from './types'
+import StateMessage from './components/ui/StateMessage'
+import Button from './components/ui/Button'
+import { FiAlertOctagon } from 'react-icons/fi'
 
 function App() {
+  /* =============================== Estados UX simulados =============================== */
+  const [loading, setLoading] = useState(true);
+  const [forceError, setForceError] = useState(false);
 
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(t);
+  }, []);
   /* =============================== CLASE FILTROS =============================== */
   // Estado para el texto de búsqueda que escribe el usuario
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -35,9 +45,6 @@ function App() {
   const cities = useMemo(() => {
     return Array.from(new Set(concerts.map((c) => c.city).sort()))
   }, []);
-
-  // useEffect se ejecuta después del primer render.
-  // Aquí se podría usar para cargar datos de una API, por ejemplo.
 
   // useMemo filtra los conciertos cada vez que cambia alguno de los filtros.
   // Se recalcula automáticamente cuando cambian las dependencias del arreglo [searchTerm, selectedCity, ...].
@@ -118,45 +125,77 @@ function App() {
   function clearCart() {
     setCart([]);
   }
-
+  // ====== Vista principal con estados ======
+  const showError = forceError;
+  const showEmpty = !loading && !showError && filteredConcerts.length === 0;
   return (
-    <div className='app'>
+    <div className='min-h-screen bg-page'>
 
       {/* Barra de navegación superior */}
       <Navbar />
+      <main className='mx-auto max-w-6xl px-6 py-6'>
+        <div className="flex flex-col gap-2">
+          <h1 className="m-0 text-2xl font-semibold">Upcoming Concerts...</h1>
 
-      {/* Barra de filtros: recibe los estados y las funciones para actualizarlos (props) */}
-      <FilterBar
-        searchTerm={searchTerm}
-        onSearchTerm={setSearchTerm}
-        genres={genres}
-        selectedGenre={selectedGenre}
-        onSelectedGenre={setSelectedGenre}
-        cities={cities}
-        selectedCity={selectedCity}
-        onSelectedCity={setSelectedCity}
-        onlyAvailable={onlyAvailable}
-        onSetOnlyAvailable={setOnlyAvailable}
-        onReset={handleReset}
-      />
+          {/* Solo para demo docente (puedes quitarlo luego) */}
+          <div className="mt-2 flex items-center gap-2">
+            <Button variant="secondary" onClick={() => setForceError((v) => !v)}>
+              <FiAlertOctagon />
+              Toggle error (demo)
+            </Button>
+          </div>
+        </div>
 
-      <main className='container'>
-        <h1 className='pageTitle'>Upcoming Concerts...</h1>
-        <p className='pageSubtitle'>Find the best concerts to attend</p>
-        {/* Renderizado condicional: si no hay resultados muestra un mensaje, si hay muestra la lista */}
-        {filteredConcerts.length === 0 ?
+        {/* Barra de filtros: recibe los estados y las funciones para actualizarlos (props) */}
+        <FilterBar
+          searchTerm={searchTerm}
+          onSearchTerm={setSearchTerm}
+          genres={genres}
+          selectedGenre={selectedGenre}
+          onSelectedGenre={setSelectedGenre}
+          cities={cities}
+          selectedCity={selectedCity}
+          onSelectedCity={setSelectedCity}
+          onlyAvailable={onlyAvailable}
+          onSetOnlyAvailable={setOnlyAvailable}
+          onReset={handleReset}
+        />
+        <div className="mt-3 flex justify-end">
+          <span className="rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted shadow-card">
+            Results: {filteredConcerts.length}
+          </span>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[2fr,1fr]">
           <section>
-            <h2> There is no results</h2>
-            <p> Try changing the filters or resetting them</p>
-          </section> :
-          <ConcertList concerts={filteredConcerts} onAddToCart={addToCart} />
-        }
-        <section>
-          <CartPanel items={cart} onRemove={removeFromCart} onQtyChange={updateQty} onClear={clearCart}></CartPanel>
-        </section>
+            {loading ? (
+              <StateMessage type="loading" title="Loading concerts..." description="Please wait a moment." />
+            ) : showError ? (
+              <StateMessage
+                type="error"
+                title="Something went wrong"
+                description="This is a simulated error for learning UI states."
+                actionText="Try again"
+                onAction={() => setForceError(false)}
+              />
+            ) : showEmpty ? (
+              <StateMessage
+                type="empty"
+                title="No results"
+                description="Try changing the filters or resetting them."
+                actionText="Reset filters"
+                onAction={handleReset}
+              />
+            ) : (
+              <ConcertList concerts={filteredConcerts} onAddToCart={addToCart} />
+            )}
+          </section>
+
+          <CartPanel items={cart} onRemove={removeFromCart} onQtyChange={updateQty} onClear={clearCart} />
+        </div>
       </main>
     </div>
-  )
+  );
 }
 
 export default App
